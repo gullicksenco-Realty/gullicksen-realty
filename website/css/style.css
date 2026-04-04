@@ -17,7 +17,7 @@
   --font-body: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 }
 
-html { scroll-behavior: smooth; overflow-x: hidden; }
+html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-body);
