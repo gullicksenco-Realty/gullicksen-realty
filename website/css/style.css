@@ -17,13 +17,14 @@
   --font-body: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   font-family: var(--font-body);
   color: var(--dark-gray);
   line-height: 1.6;
   background: var(--white);
+  overflow-x: hidden;
 }
 
 a { color: var(--gold); text-decoration: none; transition: color 0.2s; }
