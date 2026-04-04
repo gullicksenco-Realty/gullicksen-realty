@@ -72,6 +72,13 @@ img { max-width: 100%; height: auto; }
 
 .navbar-brand .gold { color: var(--gold); }
 
+.navbar-logo {
+  height: 50px;
+  width: auto;
+  margin-left: 10px;
+  border-radius: 4px;
+}
+
 .nav-links {
   display: flex;
   list-style: none;
