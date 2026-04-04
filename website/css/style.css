@@ -51,7 +51,7 @@ img { max-width: 100%; height: auto; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 80px;
+  height: 75px;
 }
 
 .navbar-brand {
@@ -73,7 +73,7 @@ img { max-width: 100%; height: auto; }
 .navbar-brand .gold { color: var(--gold); }
 
 .navbar-logo {
-  height: 80px;
+  height: 65px;
   width: auto;
   margin-left: 10px;
   border-radius: 4px;
