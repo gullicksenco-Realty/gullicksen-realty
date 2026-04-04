@@ -567,6 +567,8 @@ img { max-width: 100%; height: auto; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   
   .stats-grid { grid-template-columns: 1fr 1fr; }
+  .stat-item h3 { font-size: 1.3rem; word-break: break-word; }
+  .stat-item p { font-size: 0.75rem; }
 
   .navbar-logo { height: 40px; }
   .navbar-brand { flex-shrink: 1; min-width: 0; }
