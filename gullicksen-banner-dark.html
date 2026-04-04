@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: white; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+
+  .banner {
+    width: 1300px;
+    height: 500px;
+    border: 10px solid #8B1A1A;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #00235A 0%, #001A3D 100%);
+  }
+
+  .inner-banner {
+    width: 1280px;
+    height: 480px;
+    background: linear-gradient(180deg, #00235A 0%, #001A3D 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .eagle-left {
+    position: absolute;
+    left: 30px;
+    bottom: 40px;
+    height: 170px;
+    opacity: 0.8;
+    filter: none;
+  }
+
+  .eagle-right {
+    position: absolute;
+    right: 30px;
+    bottom: 40px;
+    height: 170px;
+    opacity: 0.8;
+    filter: none;
+    transform: scaleX(-1);
+  }
+
+  .center-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .company-name {
+    font-family: Georgia, serif;
+    font-size: 58px;
+    font-weight: 900;
+    color: white;
+    letter-spacing: 10px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .ampersand { color: #C5A44E; font-size: 48px; font-style: italic; }
+
+  .co-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px; height: 56px;
+    border: 3px solid #C5A44E;
+    border-radius: 50%;
+    font-family: Georgia, serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #C5A44E;
+    letter-spacing: 1px;
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  .divider {
+    width: 350px; height: 1px;
+    background: linear-gradient(90deg, transparent, #C5A44E, transparent);
+    margin: 12px 0;
+  }
+
+  .semper-fi { font-family: Georgia, serif; font-size: 20px; color: #C5A44E; letter-spacing: 6px; }
+  .realty { font-family: Georgia, serif; font-size: 24px; color: white; letter-spacing: 4px; font-style: italic; margin-top: 4px; }
+
+  .tagline {
+    font-family: Georgia, serif;
+    font-size: 12px;
+    color: #C5A44E;
+    letter-spacing: 3px;
+    margin-top: 10px;
+    text-transform: uppercase;
+  }
+
+  .gold-bar-top, .gold-bar-bottom {
+    position: absolute; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, #C5A44E, #D4B65C, #C5A44E);
+  }
+  .gold-bar-top { top: 0; }
+  .gold-bar-bottom { bottom: 0; }
+</style>
+</head>
+<body>
+  <div class="banner">
+    <div class="inner-banner">
+      <div class="gold-bar-top"></div>
+      <img class="eagle-left" src="eagle.png" alt="">
+      <img class="eagle-right" src="eagle.png" alt="">
+      <div class="center-content">
+        <div class="company-name">GULLICKSEN <span class="ampersand">&amp;</span> <span class="co-circle">CO</span></div>
+        <div class="divider"></div>
+        <div class="semper-fi">SEMPER FI</div>
+        <div class="realty">Realty</div>
+        <div class="tagline">Serving Those Who Served. And Everyone In Between.</div>
+      </div>
+      <div class="gold-bar-bottom"></div>
+    </div>
+  </div>
+</body>
+</html>
