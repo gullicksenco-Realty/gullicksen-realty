@@ -567,6 +567,10 @@ img { max-width: 100%; height: auto; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   
   .stats-grid { grid-template-columns: 1fr 1fr; }
+
+  .navbar-logo { height: 40px; }
+  .navbar-brand { flex-shrink: 1; min-width: 0; }
+  .eagle { height: 30px; }
   
   .listings-grid { grid-template-columns: 1fr; }
   .detail-grid { grid-template-columns: 1fr; }
