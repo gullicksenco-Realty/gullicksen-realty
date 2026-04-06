@@ -24,7 +24,7 @@ function handleSubmit(e) {
   const body = encodeURIComponent(
     `Name: ${data.name}\nEmail: ${data.email}\nPhone: ${data.phone}\nInterest: ${data.interest}\n\nMessage:\n${data.message}`
   );
-  window.location.href = `mailto:gullicksenco@gmail.com?subject=${subject}&body=${body}`;
+  window.location.href = `mailto:mike@gullicksenrealty.com?subject=${subject}&body=${body}`;
   
   status.textContent = 'Opening your email client...';
   status.style.color = '#27ae60';
