@@ -39,7 +39,7 @@ function handleSubmit(e) {
   .then(res => res.json())
   .then(data => {
     if (data.success) {
-      status.textContent = '✅ Message sent successfully! We\'ll be in touch within 24 hours.';
+      status.innerHTML = '✅ Message sent! We\'ll reach out within 24 hours.<br>Need us now? Call <a href="tel:+17708252626">(770) 825-2626</a> or email <a href="mailto:mike@gullicksenrealty.com">mike@gullicksenrealty.com</a>.';
       status.style.color = '#27ae60';
       form.reset();
     } else {
