@@ -19,17 +19,42 @@ function handleSubmit(e) {
     message: form.message.value
   };
   
-  // For now, open email client (replace with Formspree/Netlify Forms when deployed)
-  const subject = encodeURIComponent('Website Inquiry from ' + data.name);
-  const body = encodeURIComponent(
-    `Name: ${data.name}\nEmail: ${data.email}\nPhone: ${data.phone}\nInterest: ${data.interest}\n\nMessage:\n${data.message}`
-  );
-  window.location.href = `mailto:mike@gullicksenrealty.com?subject=${subject}&body=${body}`;
-  
-  status.textContent = 'Opening your email client...';
-  status.style.color = '#27ae60';
-  btn.disabled = false;
-  btn.textContent = 'Send Message';
+  // Web3Forms — sends directly from the website
+  const payload = {
+    access_key: '3bcf8ab9-c9c7-44d3-a05a-9a5ad7bfd1f1',
+    name: data.name,
+    email: data.email,
+    phone: data.phone,
+    subject: 'Website Inquiry from ' + data.name,
+    interest: data.interest,
+    message: data.message,
+    from_name: 'Gullicksen Realty Website'
+  };
+
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      status.textContent = '✅ Message sent successfully! We\'ll be in touch within 24 hours.';
+      status.style.color = '#27ae60';
+      form.reset();
+    } else {
+      status.textContent = '❌ Something went wrong. Please try again or call us directly.';
+      status.style.color = '#e74c3c';
+    }
+    btn.disabled = false;
+    btn.textContent = 'Send Message';
+  })
+  .catch(() => {
+    status.textContent = '❌ Network error. Please try again or call (770) 825-2626.';
+    status.style.color = '#e74c3c';
+    btn.disabled = false;
+    btn.textContent = 'Send Message';
+  });
 }
 
 // Smooth scroll for anchor links
