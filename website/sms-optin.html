@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMS Sign Up - Gullicksen Realty</title>
-    <meta name="description" content="Sign up for property alerts and updates from Gullicksen Realty via SMS.">
+    <title>Optional SMS Updates - Gullicksen Realty</title>
+    <meta name="description" content="Optionally subscribe to SMS updates from Gullicksen Realty. SMS consent is not required for real estate services.">
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; color: #333; line-height: 1.6; background: #f8f9fa; }
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
@@ -27,21 +27,25 @@
         .success { display: none; background: #d4edda; border: 1px solid #28a745; border-radius: 8px; padding: 20px; text-align: center; color: #155724; margin-top: 20px; }
         .success h2 { color: #155724; margin-bottom: 10px; }
         .error { display: none; background: #f8d7da; border: 1px solid #dc3545; border-radius: 8px; padding: 15px; color: #721c24; margin-top: 15px; }
-        .legal { font-size: 0.82em; color: #888; margin-top: 20px; line-height: 1.5; }
+        .optional-note { background: #fff8e5; border-left: 4px solid #C5A44E; padding: 12px 14px; margin: 18px 0; font-size: 0.94em; color: #333; }
+        .legal { font-size: 0.82em; color: #666; margin-top: 20px; line-height: 1.5; }
         .legal a { color: #C5A44E; }
         .badge { display: inline-block; background: #00235A; color: white; font-size: 0.75em; padding: 3px 10px; border-radius: 20px; margin-bottom: 15px; }
     </style>
 </head>
 <body>
     <div class="header">
-        <img src="gullicksen-logo.png" alt="Gullicksen Realty" class="logo">
+        <img src="images/gullicksen-logo.png" alt="Gullicksen Realty" class="logo">
         <a href="https://gullicksenrealty.com" class="back">← Back to Home</a>
     </div>
 
     <div class="card">
-        <span class="badge">FREE — No Spam</span>
-        <h1>📱 Property Alerts</h1>
-        <p class="subtitle">Get new listings, price drops, and market updates for Cherokee County, GA delivered straight to your phone.</p>
+        <span class="badge">Optional SMS Updates</span>
+        <h1>Optional Text Updates</h1>
+        <p class="subtitle">This form lets you optionally subscribe to marketing text updates from Gullicksen Realty. It is separate from requesting real estate help, listing information, callbacks, consultations, or services.</p>
+        <div class="optional-note">
+            SMS consent is optional and not required to buy, sell, request property information, schedule a consultation, receive a callback, or receive real estate services from Gullicksen Realty. If you leave the SMS checkbox unchecked and submit this form, the form still submits successfully, your submission is accepted, and no SMS messages will be sent. You can also contact Mike directly at (770) 265-2480 or mike@gullicksenrealty.com without opting in to text messages.
+        </div>
 
         <form id="optinForm">
             <div class="form-group">
@@ -56,18 +60,17 @@
 
             <div class="consent-box">
                 <label>
-                    <input type="checkbox" id="smsConsent" required>
-                    <span>I <strong>expressly consent</strong> to receive <strong>marketing and promotional text messages</strong> from Gullicksen Realty at the phone number provided. Msg frequency varies (typically 2-5 msgs/week). Msg & data rates may apply. Reply <strong>STOP</strong> to opt out at any time. Reply <strong>HELP</strong> for help. Consent is not a condition of purchase. View our <a href="https://gullicksenrealty.com/privacy.html" target="_blank">Privacy Policy</a> and <a href="https://gullicksenrealty.com/terms.html" target="_blank">Terms of Service</a>.</span>
+                    <input type="checkbox" id="smsConsent">
+                    <span>I <strong>expressly consent</strong> to receive <strong>optional marketing and promotional SMS/text messages</strong> from Gullicksen Realty at the phone number provided, including real estate updates, local market updates, and property-related information. Message frequency varies, typically 2-5 messages per week. Message and data rates may apply. Reply <strong>STOP</strong> to opt out at any time. Reply <strong>HELP</strong> for help. Consent is not a condition of purchase, service, property information, consultation, or callback. View our <a href="https://gullicksenrealty.com/privacy.html" target="_blank">Privacy Policy</a> and <a href="https://gullicksenrealty.com/terms.html" target="_blank">Terms of Service</a>.</span>
                 </label>
             </div>
 
-            <button type="submit" class="btn" id="submitBtn">Sign Up for Property Alerts</button>
+            <button type="submit" class="btn" id="submitBtn">Submit Preference</button>
         </form>
 
         <div class="success" id="successMsg">
-            <h2>✅ You're In!</h2>
-            <p>You'll start receiving property alerts at the number you provided.<br>
-            Reply <strong>STOP</strong> anytime to unsubscribe.</p>
+            <h2>✅ Thank You!</h2>
+            <p id="successText">Your information has been received.</p>
         </div>
 
         <div class="error" id="errorMsg"></div>
@@ -96,13 +99,8 @@
                 return;
             }
 
-            if (!consent) {
-                showError('You must check the consent box to receive SMS messages.');
-                return;
-            }
-
             btn.disabled = true;
-            btn.textContent = 'Signing Up...';
+            btn.textContent = 'Submitting...';
 
             try {
                 const resp = await fetch('/api/sms-optin', {
@@ -114,16 +112,21 @@
                 if (resp.ok) {
                     document.getElementById('optinForm').style.display = 'none';
                     document.getElementById('successMsg').style.display = 'block';
+                    if (consent) {
+                        document.getElementById('successText').innerHTML = 'You are subscribed to optional SMS updates at the number you provided.<br>Reply <strong>STOP</strong> anytime to unsubscribe.';
+                    } else {
+                        document.getElementById('successText').textContent = 'Your information has been received. You did not opt in for SMS updates. No SMS messages will be sent, and you may still receive non-SMS help if requested.';
+                    }
                 } else {
                     const data = await resp.json();
                     showError(data.error || 'Something went wrong. Please try again.');
                     btn.disabled = false;
-                    btn.textContent = 'Sign Up for Property Alerts';
+                    btn.textContent = 'Submit Preference';
                 }
             } catch (err) {
                 showError('Could not connect. Please try again later.');
                 btn.disabled = false;
-                btn.textContent = 'Sign Up for Property Alerts';
+                btn.textContent = 'Submit Preference';
             }
         });
 
