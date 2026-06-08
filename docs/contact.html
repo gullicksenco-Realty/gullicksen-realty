@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — Gullicksen & Co Realty</title>
+  <meta name="description" content="Get in touch with Gullicksen & Co Realty. We're here to help with all your real estate needs.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="navbar-brand">
+      GULLICKSEN <span class="gold">&amp; CO</span>
+    </a>
+    <img src="10496204_10152631403418453_9073215226705263273_o.jpg" alt="Gullicksen & Co Logo" class="navbar-logo">
+    <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="listings.html">Listings</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="page-header">
+  <div class="container">
+    <h1>Contact Us</h1>
+    <p>We'd love to hear from you. Let's start the conversation.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <h2 style="font-family:var(--font-heading);color:var(--navy);margin-bottom:24px">Get In Touch</h2>
+        <p style="color:#666;margin-bottom:24px">Whether you're buying, selling, or just have questions — we're here to help. Fill out the form and we'll get back to you within 24 hours.</p>
+        
+        <div style="margin-bottom:24px">
+          <p style="margin-bottom:12px"><strong style="color:var(--navy)">📧 Email</strong><br><a href="mailto:mike@gullicksenrealty.com">mike@gullicksenrealty.com</a></p>
+          <p style="margin-bottom:12px"><strong style="color:var(--navy)">📞 Phone</strong><br><a href="tel:+17708252626">(770) 825-2626</a></p>
+          <p style="margin-bottom:12px"><strong style="color:var(--navy)">📍 Office</strong><br>157 Reinhardt College Parkway, Canton, GA 30114<br><a href="tel:7702652480" style="color:var(--navy)">📞 (770) 265-2480</a></p>
+        </div>
+
+      </div>
+
+      <div>
+        <form id="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" required placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="(770) 825-2626">
+          </div>
+          <div class="form-group">
+            <label for="interest">I'm Interested In</label>
+            <select id="interest" name="interest">
+              <option value="">Select one...</option>
+              <option value="buying">Buying a Home</option>
+              <option value="selling">Selling My Home</option>
+              <option value="investing">Investment Properties</option>
+              <option value="market-analysis">Free Market Analysis</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" required placeholder="Tell us how we can help..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-gold" style="width:100%">Send Message</button>
+          <p id="form-status" style="margin-top:12px;text-align:center;font-size:0.9rem"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Gullicksen & Co Realty</h3>
+        <p>Serving Those Who Served. And Everyone In Between.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="listings.html">Listings</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="listings.html">Buy a Home</a></li>
+          <li><a href="contact.html">Sell Your Home</a></li>
+          <li><a href="contact.html">Investment Properties</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact Us</h4>
+        <p>📧 mike@gullicksenrealty.com</p>
+        <p>📞 (770) 825-2626</p>
+        <p>📍 Serving your community</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Gullicksen & Co Realty. All rights reserved. | Semper Fi</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optional SMS Updates - Gullicksen Realty</title>
+    <meta name="description" content="Optionally subscribe to SMS updates from Gullicksen Realty. SMS consent is not required for real estate services.">
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; color: #333; line-height: 1.6; background: #f8f9fa; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .logo { height: 60px; }
+        a.back { color: #C5A44E; text-decoration: none; font-weight: 600; }
+        a.back:hover { text-decoration: underline; }
+        .card { background: white; border-radius: 12px; padding: 40px 30px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+        h1 { color: #00235A; margin-bottom: 5px; font-size: 1.8em; }
+        .subtitle { color: #666; margin-bottom: 30px; font-size: 1.05em; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: 600; margin-bottom: 6px; color: #00235A; }
+        input[type="text"], input[type="tel"] { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1em; box-sizing: border-box; }
+        input[type="text"]:focus, input[type="tel"]:focus { border-color: #C5A44E; outline: none; }
+        .consent-box { background: #f0f4f8; border: 2px solid #00235A; border-radius: 8px; padding: 16px; margin: 25px 0; }
+        .consent-box label { font-weight: 500; font-size: 0.92em; color: #333; cursor: pointer; display: flex; align-items: flex-start; gap: 10px; }
+        .consent-box input[type="checkbox"] { margin-top: 4px; flex-shrink: 0; width: 18px; height: 18px; }
+        .btn { background: #C5A44E; color: white; border: none; padding: 14px 40px; font-size: 1.1em; font-weight: 700; border-radius: 8px; cursor: pointer; width: 100%; margin-top: 10px; }
+        .btn:hover { background: #b8933f; }
+        .btn:disabled { background: #ccc; cursor: not-allowed; }
+        .success { display: none; background: #d4edda; border: 1px solid #28a745; border-radius: 8px; padding: 20px; text-align: center; color: #155724; margin-top: 20px; }
+        .success h2 { color: #155724; margin-bottom: 10px; }
+        .error { display: none; background: #f8d7da; border: 1px solid #dc3545; border-radius: 8px; padding: 15px; color: #721c24; margin-top: 15px; }
+        .optional-note { background: #fff8e5; border-left: 4px solid #C5A44E; padding: 12px 14px; margin: 18px 0; font-size: 0.94em; color: #333; }
+        .legal { font-size: 0.82em; color: #666; margin-top: 20px; line-height: 1.5; }
+        .legal a { color: #C5A44E; }
+        .badge { display: inline-block; background: #00235A; color: white; font-size: 0.75em; padding: 3px 10px; border-radius: 20px; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="images/gullicksen-logo.png" alt="Gullicksen Realty" class="logo">
+        <a href="https://gullicksenrealty.com" class="back">← Back to Home</a>
+    </div>
+
+    <div class="card">
+        <span class="badge">Optional SMS Updates</span>
+        <h1>Optional Text Updates</h1>
+        <p class="subtitle">This form lets you optionally subscribe to marketing text updates from Gullicksen Realty. It is separate from requesting real estate help, listing information, callbacks, consultations, or services.</p>
+        <div class="optional-note">
+            SMS consent is optional and not required to buy, sell, request property information, schedule a consultation, receive a callback, or receive real estate services from Gullicksen Realty. If you leave the SMS checkbox unchecked and submit this form, the form still submits successfully, your submission is accepted, and no SMS messages will be sent. You can also contact Mike directly at (770) 265-2480 or mike@gullicksenrealty.com without opting in to text messages.
+        </div>
+
+        <form id="optinForm">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="John Smith" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="(770) 555-1234" required>
+            </div>
+
+            <div class="consent-box">
+                <label>
+                    <input type="checkbox" id="smsConsent">
+                    <span>I <strong>expressly consent</strong> to receive <strong>optional marketing and promotional SMS/text messages</strong> from Gullicksen Realty at the phone number provided, including real estate updates, local market updates, and property-related information. Message frequency varies, typically 2-5 messages per week. Message and data rates may apply. Reply <strong>STOP</strong> to opt out at any time. Reply <strong>HELP</strong> for help. Consent is not a condition of purchase, service, property information, consultation, or callback. View our <a href="https://gullicksenrealty.com/privacy.html" target="_blank">Privacy Policy</a> and <a href="https://gullicksenrealty.com/terms.html" target="_blank">Terms of Service</a>.</span>
+                </label>
+            </div>
+
+            <button type="submit" class="btn" id="submitBtn">Submit Preference</button>
+        </form>
+
+        <div class="success" id="successMsg">
+            <h2>✅ Thank You!</h2>
+            <p id="successText">Your information has been received.</p>
+        </div>
+
+        <div class="error" id="errorMsg"></div>
+
+        <p class="legal">
+            Gullicksen Realty, ERA Sunrise Realty<br>
+            157 Reinhardt College Parkway, Canton GA 30114<br>
+            GA License #432833 | (770) 265-2480<br><br>
+            <a href="https://gullicksenrealty.com/privacy.html">Privacy Policy</a> |
+            <a href="https://gullicksenrealty.com/terms.html">Terms of Service</a>
+        </p>
+    </div>
+
+    <script>
+        document.getElementById('optinForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.replace(/\D/g, '');
+            const btn = document.getElementById('submitBtn');
+
+            const consent = document.getElementById('smsConsent').checked;
+
+            if (phone.length < 10) {
+                showError('Please enter a valid 10-digit phone number.');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Submitting...';
+
+            try {
+                const resp = await fetch('/api/sms-optin', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, phone: '+' + phone, consent: consent })
+                });
+
+                if (resp.ok) {
+                    document.getElementById('optinForm').style.display = 'none';
+                    document.getElementById('successMsg').style.display = 'block';
+                    if (consent) {
+                        document.getElementById('successText').innerHTML = 'You are subscribed to optional SMS updates at the number you provided.<br>Reply <strong>STOP</strong> anytime to unsubscribe.';
+                    } else {
+                        document.getElementById('successText').textContent = 'Your information has been received. You did not opt in for SMS updates. No SMS messages will be sent, and you may still receive non-SMS help if requested.';
+                    }
+                } else {
+                    const data = await resp.json();
+                    showError(data.error || 'Something went wrong. Please try again.');
+                    btn.disabled = false;
+                    btn.textContent = 'Submit Preference';
+                }
+            } catch (err) {
+                showError('Could not connect. Please try again later.');
+                btn.disabled = false;
+                btn.textContent = 'Submit Preference';
+            }
+        });
+
+        function showError(msg) {
+            const el = document.getElementById('errorMsg');
+            el.textContent = msg;
+            el.style.display = 'block';
+            setTimeout(() => el.style.display = 'none', 5000);
+        }
+    </script>
+</body>
+</html>
