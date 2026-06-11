@@ -1,0 +1,15 @@
+# API Keys and Secrets
+.env
+.env.local
+.env.production
+*.env
+
+# Legacy plaintext key files
+*_api_key.txt
+sendgrid_api_key.txt
+twilio_config.json
+*_config.json.bak
+
+# Logs
+*.log
+logs/

@@ -1,0 +1,38 @@
+# API Keys and Secrets
+.env
+.env.local
+.env.production
+*.env
+
+# Legacy plaintext key files
+*_api_key.txt
+sendgrid_api_key.txt
+twilio_config.json
+*_config.json.bak
+
+# Sensitive data files
+crm.db
+*.db-shm
+*.db-wal
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Logs
+*.log
+logs/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
