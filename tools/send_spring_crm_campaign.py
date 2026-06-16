@@ -74,10 +74,37 @@ def load_recipients() -> list[dict]:
         raise SystemExit(f"Recipient CSV not found: {RECIPIENT_CSV}")
     with RECIPIENT_CSV.open(newline="") as f:
         rows = list(csv.DictReader(f))
+    
+    # Load CRM suppression list
+    crm_suppressed = set()
+    try:
+        import sqlite3
+        import sqlite3
+        conn = sqlite3.connect(CRM_DIR / "crm.db")
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        # Find ALL emails that are suppressed for ANY reason
+        cursor.execute("""
+            SELECT email1, email2 FROM contacts 
+            WHERE email_optout = 1 OR email_bounced = 1 OR sms_optout = 1
+            OR status IN ('unsubscribed', 'bounce', 'spam', 'invalid', 'blacklisted', 'suppressed')
+        """)
+        for row in cursor.fetchall():
+            for field in ['email1', 'email2']:
+                email = (row[field] or "").strip().lower()
+                if email:
+                    crm_suppressed.add(email)
+        conn.close()
+    except Exception as e:
+        print(f"WARNING: Could not load CRM suppression list: {e}", file=sys.stderr)
+    
     eligible = []
     for row in rows:
         email = norm_email(row.get("email") or "")
         if not email:
+            continue
+        if email in crm_suppressed:
+            print(f"  SKIP (suppressed): {email}")
             continue
         row["email"] = email
         eligible.append(row)

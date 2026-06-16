@@ -61,6 +61,29 @@ def load_recipients() -> tuple[list[dict[str, str]], list[dict[str, str]]]:
     with RECIPIENT_CSV.open(newline="") as f:
         rows = list(csv.DictReader(f))
 
+    # Load CRM suppression list
+    crm_suppressed = set()
+    try:
+        import sqlite3
+        crm_db = Path("/Users/warden/.hermes/workspace/crm/crm.db")
+        if crm_db.exists():
+            conn = sqlite3.connect(crm_db)
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT email1, email2 FROM contacts 
+                WHERE email_optout = 1 OR email_bounced = 1 OR sms_optout = 1
+                OR status IN ('unsubscribed', 'bounce', 'spam', 'invalid', 'blacklisted', 'suppressed')
+            """)
+            for row in cursor.fetchall():
+                for field in ['email1', 'email2']:
+                    email = (row[field] or "").strip().lower()
+                    if email:
+                        crm_suppressed.add(email)
+            conn.close()
+    except Exception as e:
+        print(f"WARNING: Could not load CRM suppression list: {e}", file=sys.stderr)
+
     eligible = []
     skipped = []
     seen_emails = set()
@@ -71,6 +94,9 @@ def load_recipients() -> tuple[list[dict[str, str]], list[dict[str, str]]]:
             continue
         if not email:
             skipped.append({**row, "skip_reason": "missing_email"})
+            continue
+        if email in crm_suppressed:
+            skipped.append({**row, "skip_reason": "crm_suppressed"})
             continue
         if row.get("deceased") == "True" or row.get("litigator") == "True":
             skipped.append({**row, "skip_reason": "safety_suppression"})
