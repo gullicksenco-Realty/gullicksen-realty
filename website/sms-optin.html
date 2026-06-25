@@ -57,7 +57,7 @@
                 <label for="phone">Phone Number</label>
                 <input type="tel" id="phone" name="phone" placeholder="(770) 555-1234" required>
             </div>
-
+            <input type="hidden" id="email" name="email" value="mike@gullicksenrealty.com">
             <div class="consent-box">
                 <label>
                     <input type="checkbox" id="smsConsent">
@@ -91,7 +91,6 @@
             const name = document.getElementById('name').value.trim();
             const phone = document.getElementById('phone').value.replace(/\D/g, '');
             const btn = document.getElementById('submitBtn');
-
             const consent = document.getElementById('smsConsent').checked;
 
             if (phone.length < 10) {
@@ -102,14 +101,24 @@
             btn.disabled = true;
             btn.textContent = 'Submitting...';
 
-            try {
-                const resp = await fetch('/api/sms-optin', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, phone: '+' + phone, consent: consent })
-                });
+            const payload = {
+                access_key: '3bcf8ab9-c9c7-44d3-a05a-9a5ad7bfd1f1',
+                name: name,
+                email: 'mike@gullicksenrealty.com',
+                phone: '+' + phone,
+                subject: 'SMS Opt-In ' + (consent ? 'Confirmed' : 'Declined') + ' from ' + name,
+                message: 'SMS consent: ' + (consent ? 'Checked (opted in)' : 'Unchecked (not opted in)') + '. Phone: +' + phone + '. Date: ' + new Date().toISOString(),
+                from_name: 'Gullicksen Realty SMS Opt-In'
+            };
 
-                if (resp.ok) {
+            try {
+                const resp = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await resp.json();
+                if (data.success) {
                     document.getElementById('optinForm').style.display = 'none';
                     document.getElementById('successMsg').style.display = 'block';
                     if (consent) {
@@ -118,8 +127,7 @@
                         document.getElementById('successText').textContent = 'Your information has been received. You did not opt in for SMS updates. No SMS messages will be sent, and you may still receive non-SMS help if requested.';
                     }
                 } else {
-                    const data = await resp.json();
-                    showError(data.error || 'Something went wrong. Please try again.');
+                    showError(data.message || 'Something went wrong. Please try again.');
                     btn.disabled = false;
                     btn.textContent = 'Submit Preference';
                 }
